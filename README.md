@@ -1,6 +1,6 @@
-# Atividade_avaliativa03
+# Atividade avaliativa 03
 Data de entrega: 16/06/25
-4.0 Pontos
 
 ## Alunos: 
 Júlio César Santos de Sousa Brito
+João Victor Muniz de Abreu
