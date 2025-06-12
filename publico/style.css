@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --Azul: #353fce;
+  --Preto: #000000;
+  --Branco: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--Azul);
+  font-family: "Roboto", sans-serif;
+}
+
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 30vh;
+  position: relative;
+  background-color: var(--Branco);
+  box-shadow: 0px 0px 20px var(--Preto);
+}
+
+#loginContainer input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+#loginContainer h1 {
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+#btn_fechar {
+  border: none;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
+  background-color: var(--Preto);
+  color: var(--Branco);
+}
+
+#btn_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 120px;
+  height: 30px;
+  border: none;
+  background-color: #353fce;
+  color: var(--Branco);
+}
