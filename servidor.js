@@ -37,8 +37,6 @@ app.post('/fazer_login', (req, res)=>{
   })
 })
 
-
-
 // Pagina gerenciar filais certo
 app.get('/filiais', (req, res)=>{
   res.sendFile(path.join(__dirname))

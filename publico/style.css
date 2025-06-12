@@ -88,7 +88,7 @@ body {
 }
 
 /* login.html */
-#login-page {
+#loginPage {
   font-family: "Roboto", sans-serif;
   background-color: var(--Azul);
   color: var(--Preto);
@@ -173,5 +173,44 @@ body {
 }
 
 #btn_login:hover {
+  transform: scale(1.1);
+}
+
+/* Logout.html*/
+
+#logoutContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 30vh;
+  position: relative;
+  background-color: var(--Branco);
+}
+
+#btn_redirect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--Azul);
+  color: var(--Branco);
+  width: fit-content;
+  height: 40px;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 14px;
+}
+
+#btn_redirect i {
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
+  margin-left: 8px;
+  font-size: 16px;
+}
+#btn_redirect:hover {
   transform: scale(1.1);
 }
