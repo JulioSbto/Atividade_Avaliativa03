@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --Azul: #353fce;
+  --Preto: #000000;
+  --Branco: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* index.html */
+
+body {
+  background-color: var(--Branco);
+  color: var(--Preto);
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  height: 100vh;
+}
+
+#sidebar {
+  width: 250px;
+  background-color: var(--Azul);
+  color: var(--Branco);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+#sidebar ul {
+  list-style: none;
+  width: 100%;
+}
+
+#sidebar ul li {
+  margin-bottom: 20px;
+}
+
+#sidebar ul li a {
+  text-decoration: none;
+  color: var(--Branco);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+#sidebar ul li a i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+#sidebar ul li a:hover {
+  transform: scale(1.1);
+}
+
+#main-content {
+  flex: 1;
+  padding: 50px;
+}
+
+#main-content h2 {
+  font-size: 24px;
+  color: var(--Preto);
+  margin-bottom: 10px;
+}
+
+#main-content p {
+  font-size: 16px;
+  color: var(--Preto);
+}
+
+/* login.html */
+#login-page {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--Azul);
+  color: var(--Preto);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 30vh;
+  position: relative;
+  background-color: var(--Branco);
+  box-shadow: 0px 0px 20px var(--Preto);
+}
+
+#loginContainer input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+#loginContainer h1 {
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+#btn_fechar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: none;
+  width: 25px;
+  height: 25px;
+  top: 0px;
+  right: 10px;
+  margin-top: 20px;
+  margin-right: 10px;
+  background-color: var(--Preto);
+  color: var(--Branco);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#btn_fechar i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+
+#btn_fechar:hover {
+  transform: scale(1.1);
+}
+
+#btn_login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: none;
+  width: 120px;
+  height: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #353fce;
+  color: var(--Branco);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#btn_login:hover {
+  transform: scale(1.1);
+}
