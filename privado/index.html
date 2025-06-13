@@ -9,6 +9,10 @@
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css"
+    />
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   </head>
 
@@ -20,108 +24,118 @@
 
       <ul>
         <li>
-          <a href="#">
+          <button class="btn_menu" data-target="cad_funcionario">
             <i class="fi fi-sr-add"></i> Cadastrar Funcionário
-        </a>
-          </a>
+          </button>
         </li>
 
         <li>
-          <a href="#">
+          <button class="btn_menu" data-target="cad_filial">
             <i class="fi fi-sr-add"></i> Cadastrar Filial
-          </a>
+          </button>
         </li>
 
         <li>
-          <a href="#">
+          <button class="btn_menu" data-target="alt_func">
             <i class="fi fi-sr-document"></i> Gerenciar Funcionários
-          </a>
+          </button>
         </li>
 
         <li>
-          <a href="#">
+          <button id="btn_sair">
             <i class="fi fi-sr-leave"></i> Sair
-          </a>
+          </button>
         </li>
       </ul>
     </div>
 
+
+    <!-- Tela Inicial -->
     <main id="main-content">
-      <h2>Bem Vindo(a)!</h2>
-      <p>Selecione uma opção ao lado para começar.</p>
-    </main>
+      <div id="pagina_inicial">
+        <h2>Bem Vindo(a)!</h2>
+        <p>Selecione uma opção ao lado para começar.</p>
+      </div>
 
-<!-- cadastrar funcionario-->
+      <div id="tela_escura">
 
-    <div id="tela_escura">
-      <section id="cad_funcionario">
-        <button id="btn_fechar_cad">X</button>
-        <h1>Cadastrar Funcionário</h1>
-        Nome <br>
-        <input type="text" id="caixa_nome"> <br>
-        Filial <br> 
-        <select id="caixa_filial"></select> <br><br>
-        Salario <br>
-        <input type="text" id="caixa_salario"> <br>
-        Setor <br>
-        <Select id="caixa_setor">
-          <option value="">Selecione</option>
+        <!-- Cadastrar Funcionário -->
+        <section id="cad_funcionario">
+          <button id="btn_fechar_cad" class="btn_fechar">
+            <i class="fi fi-bs-x"></i>
+          </button>
+          <h1>Cadastrar Funcionário</h1>
+          Nome  
+          <input type="text" id="caixa_nome_cad" />  
+          Filial  
+          <select id="caixa_filial_cad"></select>
+          Salário  
+          <input type="text" id="caixa_salario_cad" />  
+          Setor  
+          <select id="caixa_setor_cad">
+            <option value="">Selecione</option>
             <option value="Administrativo">Administrativo</option>
             <option value="Financeiro">Financeiro</option>
             <option value="Suporte">Suporte</option>
-        </Select> <br><br>
-        Status <br>
-        <select id="caixa_status">
+          </select>
+          Status  
+          <select id="caixa_status_cad">
             <option value="">Selecione</option>
             <option value="Inativo">Inativo</option>
             <option value="Ativo">Ativo</option>
-        </select> <br><br>
-        <button id="btn_cadastrar">Cadastrar</button>
-      </section>
+          </select>
+          <button id="btn_cadastrar_cad" class="btn_confirmar">Cadastrar</button>
+        </section>
 
-<!-- cadastrar filial-->
+        <!-- Cadastrar Filial -->
+        <section id="cad_filial">
+          <button id="btn_fechar_filial" class="btn_fechar">
+            <i class="fi fi-bs-x"></i>
+          </button>
+          <h1>Cadastrar Filial</h1>
+          Nome da Filial  
+          <input type="text" id="nome_filial" />  
+          Endereço  
+          <input type="text" id="cad_endereco" />  
+          <button id="cadastrar_filial" class="btn_confirmar">Cadastrar</button>
+        </section>
 
-      <section id="cad_filial">   
-        <button id="btn_fechar_filial">X</button>
-        <h1>Cadastrar Filial</h1>
-        Nome da Filial <br> 
-        <input type="text" id="nome_filial"> <br>
-        Endereço <br>
-        <input type="text" id="cad_endereco"> <br>
-        <button id="cadadastrar_filial"></button> 
-      </section>
+        <!-- Alterar Funcionário -->
+        <section id="alt_func">
+          <button id="btn_fechar_alt" class="btn_fechar">
+            <i class="fi fi-bs-x"></i>
+          </button>
+          <h1>Alterar Funcionário</h1>
+          Matrícula  
+          <input type="text" id="caixa_id_alt" disabled />  
+          Nome  
+          <input type="text" id="caixa_nome_alt" />  
+          Filial  
+          <select id="caixa_filial_alt"></select>  
+          Salário  
+          <input type="text" id="caixa_salario_alt" /> <br/>
+          Setor  
+          <select id="caixa_setor_alt">
+            <option value="">Selecione</option>
+            <option value="Administrativo">Administrativo</option>
+            <option value="Financeiro">Financeiro</option>
+            <option value="Suporte">Suporte</option>
+          </select>  
+          Status  
+          <select id="caixa_status_alt">
+            <option value="">Selecione</option>
+            <option value="Inativo">Inativo</option>
+            <option value="Ativo">Ativo</option>
+          </select>  
+          <div class="btns_alt_func">
+            <button id="btn_salv_alt">Salvar Alterações</button>
+            <button id="btn_excluir_alt" class="btn_excluir">Excluir</button>
+          </div>
+        </section>
 
-<!-- alterar funcionario-->
+      </div> <!-- fim da tela_escura -->
+    </main>
 
-      <section id="alt_func">
-        <button id="btn_fechar_alt"></button>
-        <h1>Alterar Funcionario</h1>
-        Matricula <br>
-        <input type="text" id="caixa_id" disabled> <br>
-        Nome <br>
-        <input type="text" id="caixa_nome2"> <br>
-        Filial <br> 
-        <select id="caixa_filial2"></select> <br><br>
-        Salario <br>
-        <input type="text" id="caixa_salario"> <br>
-        Setor <br>
-        <Select id="caixa_setor2">
-          <option value="">Selecione</option>
-          <option value="Administrativo">Administrativo</option>
-          <option value="Financeiro">Financeiro</option>
-          <option value="Suporte">Suporte</option>
-        </Select> <br><br>
-        Status <br>
-        <select id="caixa_status">
-          <option value="">Selecione</option>
-          <option value="Inativo">Inativo</option>
-          <option value="Ativo">Ativo</option>
-        </select> <br><br>
-        <button id="btn_salv_alt">Salvar Alterações</button>
-        <button id="excluir">excluir</button>
-      </section>
-
-      </div>
-      <script src="/funcoes.js"></script>
+    <script src="/funcoes.js"></script>
   </body>
 </html>

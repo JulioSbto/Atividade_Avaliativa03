@@ -2,6 +2,9 @@
 
 :root {
   --Azul: #353fce;
+  --AzulHover: #2b33a8 ;
+  --Vermelho: #e60000;
+  --VermelhoHover: #cc0000 ;
   --Preto: #000000;
   --Branco: #ffffff;
 }
@@ -10,6 +13,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  
 }
 
 /* index.html */
@@ -17,7 +22,6 @@
 body {
   background-color: var(--Branco);
   color: var(--Preto);
-  font-family: "Roboto", sans-serif;
   display: flex;
   height: 100vh;
 }
@@ -47,27 +51,34 @@ body {
 #sidebar ul {
   list-style: none;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 #sidebar ul li {
   margin-bottom: 20px;
 }
 
-#sidebar ul li a {
-  text-decoration: none;
+#sidebar ul li button {
+  background: none;
+  border: none;
   color: var(--Branco);
   font-size: 16px;
   display: flex;
   align-items: center;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
   transition: all 0.3s ease-in-out;
 }
 
-#sidebar ul li a i {
+#sidebar ul li button i {
   margin-right: 10px;
   font-size: 18px;
 }
 
-#sidebar ul li a:hover {
+#sidebar ul li button:hover {
   transform: scale(1.1);
 }
 
@@ -113,10 +124,12 @@ body {
 }
 
 #loginContainer input {
-  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
   margin-bottom: 10px;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  font-size: 14px;
 }
 
 #loginContainer h1 {
@@ -124,17 +137,18 @@ body {
   margin-top: 40px;
 }
 
-#btn_fechar {
+.btn_fechar {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   border: none;
+  border-radius: 4px;
   width: 25px;
   height: 25px;
   top: 0px;
   right: 10px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 10px;
   background-color: var(--Preto);
   color: var(--Branco);
@@ -142,7 +156,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
-#btn_fechar i {
+.btn_fechar i {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -151,28 +165,120 @@ body {
   font-size: 16px;
 }
 
-#btn_fechar:hover {
+.btn_fechar:hover {
   transform: scale(1.1);
+  background-color: #1f1f1f;
 }
 
-#btn_login {
+.btn_confirmar {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   border: none;
+  border-radius: 4px;
   width: 120px;
   height: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  background-color: #353fce;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: var(--Azul);
+  color: var(--Branco);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn_confirmar:hover {
+  background-color: var(--AzulHover);
+  transform: scale(1.1);
+}
+
+/* Tela escura */
+#tela_escura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  z-index: 1000;
+}
+
+/* Cards */
+#cad_funcionario,
+#cad_filial,
+#alt_func {
+  background-color: var(--Branco);
+  border-radius: 15px;
+  padding: 20px 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  min-width: 300px;
+  max-width: 400px;
+  width: 90%;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#cad_funcionario h1,
+#cad_filial h1,
+#alt_func h1 {
+  margin-bottom: 10px;
+}
+
+#cad_funcionario input,
+#cad_funcionario select,
+#cad_filial input,
+#alt_func input,
+#alt_func select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  font-size: 14px;
+}
+
+.btns_alt_func {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btns_alt_func button {
+  flex: 1;
+  max-width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
   color: var(--Branco);
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
-#btn_login:hover {
+#btn_salv_alt {
+  background-color: var(--Azul); 
+}
+
+#btn_salv_alt:hover {
+  background-color: var(--AzulHover);
+  transform: scale(1.1);
+}
+
+#btn_excluir_alt {
+  background-color: var(--Vermelho); 
+}
+
+#btn_excluir_alt:hover {
+  background-color: var(--VermelhoHover);
   transform: scale(1.1);
 }
 
@@ -188,29 +294,13 @@ body {
   background-color: var(--Branco);
 }
 
-#btn_redirect {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--Azul);
-  color: var(--Branco);
+#btn_redirecionar {
   width: fit-content;
-  height: 40px;
-  padding: 10px 20px;
-  margin-top: 20px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  font-size: 14px;
 }
 
-#btn_redirect i {
-  display: flex;
-  align-items: center;
-  padding-top: 2px;
+.btn_confirmar i {
   margin-left: 8px;
-  font-size: 16px;
-}
-#btn_redirect:hover {
-  transform: scale(1.1);
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
