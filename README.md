@@ -1,5 +1,5 @@
 # Atividade avaliativa 03
-## Data de entrega: 16/06/25
+Data de entrega: 16/06/25
 
 ## Alunos: 
 Júlio César Santos de Sousa Brito
