@@ -64,10 +64,10 @@ app.get('/funcionarios', (req, res)=> {
 
 // Endpoint para cadastar os funcionarios certo
 app.post('/funcionarios', (req, res)=>{
-    const {matricula, nome, codigo_filial, salario, setor, status} = req.body;
+    const {matricula, nome_funcionario, filial, salario, setor, status} = req.body;
     db.query(`INSERT INTO funcionarios (matricula, nome,
       codigo_filial, salario, setor, status) VALUES (?, ?, ?, ?, ?, ?)`,
-      [matricula, nome, codigo_filial, salario, setor, status],
+      [matricula, nome_funcionario, filial, salario, setor, status],
       (erro, resultado)=>{
         if(erro){return res.json({msg: "Falha ao cadastrar"+erro.message})}
         return res.json({msg:"Cadastrado com sucesso!"})
