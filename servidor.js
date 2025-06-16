@@ -1,109 +1,177 @@
-const db = require('./conexao');
-const express = require('express');
-const session = require('express-session');
-const path = require('path');
-const cors = require('cors');
+const db = require("./conexao");
+const express = require("express");
+const session = require("express-session");
+const path = require("path");
+const cors = require("cors");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Diz ao Express para servir arquivos da pasta 'publico'
-app.use(express.static(path.join(__dirname, 'publico')));
+app.use(express.static(path.join(__dirname, "publico")));
 
-app.use(session({
-  secret: '46feb3e2fec47e6d6cd7bc44bfe1aef9',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 15 * 60 * 1000 }
-}));
-
-// Pagina Principal certo
-app.get('/', (req, res)=>{
-  res.sendFile(path.join(__dirname, 'privado', 'index.html'))
-})
-
-app.post('/fazer_login', (req, res)=>{
-  const [username, password] = req.body;
-  db.query('SELECT * FROM usuarios WHERE username=? AND password=?',
-  [username, password], (erro, resultado)=>{
-    if(erro){return res.send("falha no login!"+erro.message)}
-    if(resultado,length >= 1){
-      req.session.usuarioLogado = "Sim"
-      res.redirect('/')
-      }else{
-        res.send('Usuario e/ou senha incorretas')
-    }
+app.use(
+  session({
+    secret: "46feb3e2fec47e6d6cd7bc44bfe1aef9",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 15 * 60 * 1000 },
   })
-})
-// Pagina gerenciar filais certo
-app.get('/filiais', (req, res)=>{
-  res.sendFile(path.join(__dirname))
-})
+);
 
-// Pagina gerenciar funcionarios certo
-app.get('/funcionarios', (req, res)=>{
-  res.sendFile(path.join(__dirname))
-})
+function verificarLogin(req, res, next) {
+  if (req.session.usuarioLogado) {
+    next();
+  } else {
+    res.redirect("/login.html");
+  }
+}
 
-// endpoint para consultar as filiais certo
-app.get('/filiais', (req, res)=> {
-  db.query('SELECT * FROM filiais', (erro, resultado)=>{
-     if(erro){return res.json({msg:'falha ao consultar as filiais'+erro.message})}
-    return res.json(resultado)
-    })
+// Páginas protegidas
+app.get("/", verificarLogin, (req, res) => {
+  res.sendFile(path.join(__dirname, "privado", "index.html"));
 });
 
-// endpoint para consultar os funcionarios certo
-app.get('/funcionarios', (req, res)=> {
-  db.query('SELECT * FROM funcionarios', (erro, resultado)=>{
-     if(erro){return res.json({msg:'falha ao consultar os funcionarios'+erro.message})}
-    return res.json(resultado)
-    })
+// Login
+app.post("/fazer_login", (req, res) => {
+  const { username, password } = req.body;
+  db.query(
+    "SELECT * FROM usuarios WHERE username=? AND password=?",
+    [username, password],
+    (erro, resultado) => {
+      if (erro) return res.send("Falha no login! " + erro.message);
+      if (resultado.length >= 1) {
+        req.session.usuarioLogado = "Sim";
+        res.redirect("/");
+      } else {
+        res.send("Usuário e/ou senha incorretos");
+      }
+    }
+  );
 });
 
-// Endpoint para cadastar os funcionarios certo
-app.post('/funcionarios', (req, res)=>{
-    const {matricula, nome_funcionario, filial, salario, setor, status} = req.body;
-    db.query(`INSERT INTO funcionarios (matricula, nome,
-      codigo_filial, salario, setor, status) VALUES (?, ?, ?, ?, ?, ?)`,
-      [matricula, nome_funcionario, filial, salario, setor, status],
-      (erro, resultado)=>{
-        if(erro){return res.json({msg: "Falha ao cadastrar"+erro.message})}
-        return res.json({msg:"Cadastrado com sucesso!"})
-      })
-})
-// endpoint para cadastar as filiais certo 
-app.post('/filiais', (req, res)=>{
-  const {codigo_filial, nome_filial, endereco} = req.body;
-  db.query(`INSERT INTO filiais (codigo_filial, nome_filial, endereco) VALUES (?, ?, ?)`,
-    [codigo_filial, nome_filial, endereco],
-    (erro, resultado)=>{
-      if(erro){return res.json({msg: "Falha ao cadastrar"+erro.message})}
-      return res.json({msg:"Cadastrado com sucesso!"})
-    })
-})
+// API filiais
+app.get("/api/filiais", (req, res) => {
+  db.query("SELECT * FROM filiais", (erro, resultado) => {
+    if (erro)
+      return res.json({
+        msg: "Falha ao consultar as filiais: " + erro.message,
+      });
+    return res.json(resultado);
+  });
+});
 
-// Endpoint para consultar todos os funcionarios com status ativos
-app.get('/funcionarios_ativos', (req, res)=>{
-  db.query(`SELECT * FROM vw_funcionarios_filiais WHERE status= 'Ativos'`,
-          (erro, resultado)=>{
-            if(erro){return res.json({msg:"Falha ao consultar!"+erro.message})}
-            if(resultado.length == 0){return res.json({msg:"Funcionario nota 10"})}
-            return res.json(resultado)
-          })
-})
+// Endpoint p cadastrar filial
+app.post("/api/filiais", (req, res) => {
+  const { nome_filial, endereco } = req.body;
 
-// Endpoint para consultar todos os funcionarios com status inativos
-app.get('/funcionarios_inativos', (req, res)=>{
-  db.query(`SELECT * FROM vw_funcionarios_filiais WHERE status= 'Inativos'`,
-          (erro, resultado)=>{
-            if(erro){return res.json({msg:"Falha ao consultar!"+erro.message})}
-            if(resultado.length == 0){return res.json({msg:"Nenhum projeto"})}
-            return res.json(resultado)
-          })
-})
+  if (!nome_filial || !endereco) {
+    return res.status(400).json({ msg: "Preencha todos os campos!" });
+  }
 
-app.listen(3000, ()=>{
-    console.log('Servidor rodando em http://localhost:3000');
+  // Conta as filiais pra gerar o codigo
+  db.query("SELECT COUNT(*) AS total FROM filiais", (err, results) => {
+    if (err)
+      return res
+        .status(500)
+        .json({ msg: "Erro ao consultar filiais: " + err.message });
+
+    const novoCodigoFilial = results[0].total + 1;
+
+    db.query(
+      "INSERT INTO filiais (codigo_filial, nome_filial, endereco) VALUES (?, ?, ?)",
+      [novoCodigoFilial, nome_filial, endereco],
+      (erro, resultado) => {
+        if (erro)
+          return res
+            .status(500)
+            .json({ msg: "Falha ao cadastrar filial: " + erro.message });
+
+        return res.json({
+          msg: "Filial cadastrada com sucesso!",
+        });
+      }
+    );
+  });
+});
+
+// API funcionários
+app.get("/api/funcionarios", (req, res) => {
+  db.query("SELECT * FROM vw_funcionarios_filiais", (erro, resultado) => {
+    if (erro)
+      return res.json({
+        msg: "Falha ao consultar os funcionários: " + erro.message,
+      });
+    return res.json(resultado);
+  });
+});
+
+// Puxa os dados do funcionário
+app.get("/api/funcionarios/:id", (req, res) => {
+  const id = req.params.id;
+  db.query(
+    "SELECT * FROM funcionarios WHERE matricula = ?",
+    [id],
+    (erro, resultado) => {
+      if (erro)
+        return res
+          .status(500)
+          .json({ msg: "Erro ao consultar funcionário: " + erro.message });
+      if (resultado.length === 0)
+        return res.status(404).json({ msg: "Funcionário não encontrado" });
+      return res.json(resultado[0]);
+    }
+  );
+});
+
+// Endpoint p cadastrar funcionário
+app.post("/api/funcionarios", (req, res) => {
+  const { nome_funcionario, codigo_filial, salario, setor, status } = req.body;
+  db.query(
+    `INSERT INTO funcionarios (nome_funcionario, codigo_filial, salario, setor, status)
+    VALUES (?, ?, ?, ?, ?)`,
+    [nome_funcionario, codigo_filial, salario, setor, status],
+    (erro, resultado) => {
+      if (erro) return res.json({ msg: "Falha ao cadastrar: " + erro.message });
+      return res.json({ msg: "Funcionário cadastrado com sucesso!" });
+    }
+  );
+});
+
+// Endpoint atualizar dados de funcionário
+app.put("/api/funcionarios/:id", (req, res) => {
+  const id = req.params.id;
+  const { nome_funcionario, codigo_filial, salario, setor, status } = req.body;
+
+  db.query(
+    `UPDATE funcionarios SET nome_funcionario = ?, codigo_filial = ?, salario = ?, setor = ?, status = ? WHERE matricula = ?`,
+    [nome_funcionario, codigo_filial, salario, setor, status, id],
+    (erro, resultado) => {
+      if (erro)
+        return res
+          .status(500)
+          .json({ msg: "Falha ao atualizar funcionário: " + erro.message });
+      return res.json({ msg: "Funcionário atualizado com sucesso!" });
+    }
+  );
+});
+
+// Endpoint excluir funcionário
+app.delete("/api/funcionarios/:id", (req, res) => {
+  const id = req.params.id;
+  db.query(
+    "DELETE FROM funcionarios WHERE matricula = ?",
+    [id],
+    (erro, resultado) => {
+      if (erro)
+        return res
+          .status(500)
+          .json({ msg: "Erro ao excluir funcionário: " + erro.message });
+      return res.json({ msg: "Funcionário excluído com sucesso!" });
+    }
+  );
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando em http://localhost:3000");
 });

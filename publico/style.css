@@ -2,9 +2,9 @@
 
 :root {
   --Azul: #353fce;
-  --AzulHover: #2b33a8 ;
+  --AzulHover: #2b33a8;
   --Vermelho: #e60000;
-  --VermelhoHover: #cc0000 ;
+  --VermelhoHover: #cc0000;
   --Preto: #000000;
   --Branco: #ffffff;
 }
@@ -14,7 +14,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  
 }
 
 /* index.html */
@@ -27,14 +26,16 @@ body {
 }
 
 #sidebar {
+  position: fixed;
   width: 250px;
+  height: 100vh;
   background-color: var(--Azul);
   color: var(--Branco);
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
 }
 
 .logo-container {
@@ -82,18 +83,27 @@ body {
   transform: scale(1.1);
 }
 
-#main-content {
+#main_content {
   flex: 1;
-  padding: 50px;
+  padding: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-left: 250px;
 }
 
-#main-content h2 {
+#main_content h2 {
   font-size: 24px;
   color: var(--Preto);
   margin-bottom: 10px;
 }
 
-#main-content p {
+#main_content h3 {
+  font-size: 32px;
+  color: var(--Preto);
+  margin-bottom: 10px;
+}
+
+#main_content p {
   font-size: 16px;
   color: var(--Preto);
 }
@@ -120,7 +130,7 @@ body {
   margin-top: 30vh;
   position: relative;
   background-color: var(--Branco);
-  box-shadow: 0px 0px 20px var(--Preto);
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
 }
 
 #loginContainer input {
@@ -193,7 +203,6 @@ body {
   transform: scale(1.1);
 }
 
-/* Tela escura */
 #tela_escura {
   position: fixed;
   top: 0;
@@ -209,14 +218,14 @@ body {
   z-index: 1000;
 }
 
-/* Cards */
+/* Formularios */
 #cad_funcionario,
 #cad_filial,
 #alt_func {
   background-color: var(--Branco);
   border-radius: 15px;
   padding: 20px 40px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
   position: relative;
   min-width: 300px;
   max-width: 400px;
@@ -245,6 +254,54 @@ body {
   font-size: 14px;
 }
 
+/* Cards */
+#cards_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.cards_coluna {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
+}
+
+.cards_coluna h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: var(--Preto);
+}
+
+.func_card {
+  background: var(--Branco);
+  border: 1.5px solid #cccc;
+  border-radius: 10px;
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.func_card:hover {
+  transform: scale(1.1);
+}
+
+.NumMatricula {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.disabled {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
 .btns_alt_func {
   display: flex;
   justify-content: center;
@@ -265,7 +322,7 @@ body {
 }
 
 #btn_salv_alt {
-  background-color: var(--Azul); 
+  background-color: var(--Azul);
 }
 
 #btn_salv_alt:hover {
@@ -274,7 +331,7 @@ body {
 }
 
 #btn_excluir_alt {
-  background-color: var(--Vermelho); 
+  background-color: var(--Vermelho);
 }
 
 #btn_excluir_alt:hover {
