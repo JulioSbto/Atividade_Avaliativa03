@@ -83,6 +83,7 @@ body {
   transform: scale(1.1);
 }
 
+/* Main */
 #main_content {
   flex: 1;
   padding: 20px;
@@ -108,43 +109,55 @@ body {
   color: var(--Preto);
 }
 
-/* login.html */
-#loginPage {
-  font-family: "Roboto", sans-serif;
-  background-color: var(--Azul);
-  color: var(--Preto);
-  display: flex;
+#tela_escura {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  display: none;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  flex-direction: row;
+  z-index: 1000;
 }
 
-#loginContainer {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  height: 350px;
-  padding: 20px;
-  border-radius: 10px;
-  margin: auto;
-  margin-top: 30vh;
-  position: relative;
+/* Formularios */
+#cad_funcionario,
+#cad_filial,
+#alt_func {
   background-color: var(--Branco);
+  border-radius: 15px;
+  padding: 20px 40px;
   box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
+  position: relative;
+  min-width: 300px;
+  max-width: 400px;
+  width: 90%;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
 }
 
-#loginContainer input {
+#cad_funcionario h1,
+#cad_filial h1,
+#alt_func h1 {
+  margin-bottom: 10px;
+}
+
+#cad_funcionario input,
+#cad_funcionario select,
+#cad_filial input,
+#alt_func input,
+#alt_func select {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
   border-radius: 8px;
   border: 2px solid #ccc;
   font-size: 14px;
-}
-
-#loginContainer h1 {
-  margin-bottom: 20px;
-  margin-top: 40px;
 }
 
 .btn_fechar {
@@ -203,55 +216,41 @@ body {
   transform: scale(1.1);
 }
 
-#tela_escura {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(2px);
-  display: none;
+.btns_alt_func {
+  display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  z-index: 1000;
-}
-
-/* Formularios */
-#cad_funcionario,
-#cad_filial,
-#alt_func {
-  background-color: var(--Branco);
-  border-radius: 15px;
-  padding: 20px 40px;
-  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
-  position: relative;
-  min-width: 300px;
-  max-width: 400px;
-  width: 90%;
-  display: none;
-  flex-direction: column;
   gap: 10px;
+  margin-top: 10px;
 }
 
-#cad_funcionario h1,
-#cad_filial h1,
-#alt_func h1 {
-  margin-bottom: 10px;
+.btns_alt_func button {
+  flex: 1;
+  max-width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  color: var(--Branco);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-#cad_funcionario input,
-#cad_funcionario select,
-#cad_filial input,
-#alt_func input,
-#alt_func select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
-  font-size: 14px;
+#btn_salv_alt {
+  background-color: var(--Azul);
+}
+
+#btn_salv_alt:hover {
+  background-color: var(--AzulHover);
+  transform: scale(1.1);
+}
+
+#btn_excluir_alt {
+  background-color: var(--Vermelho);
+}
+
+#btn_excluir_alt:hover {
+  background-color: var(--VermelhoHover);
+  transform: scale(1.1);
 }
 
 /* Cards */
@@ -302,45 +301,46 @@ body {
   color: #555;
 }
 
-.btns_alt_func {
+/* login.html */
+#loginPage {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--Azul);
+  color: var(--Preto);
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
+  align-items: center;
+  height: 100vh;
 }
 
-.btns_alt_func button {
-  flex: 1;
-  max-width: 150px;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-  color: var(--Branco);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 30vh;
+  position: relative;
+  background-color: var(--Branco);
+  box-shadow: 2px 0 20px 2px rgba(0, 0, 0, 0.7);
 }
 
-#btn_salv_alt {
-  background-color: var(--Azul);
+#loginContainer input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  font-size: 14px;
 }
 
-#btn_salv_alt:hover {
-  background-color: var(--AzulHover);
-  transform: scale(1.1);
-}
-
-#btn_excluir_alt {
-  background-color: var(--Vermelho);
-}
-
-#btn_excluir_alt:hover {
-  background-color: var(--VermelhoHover);
-  transform: scale(1.1);
+#loginContainer h1 {
+  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 /* Logout.html*/
-
 #logoutContainer {
   display: flex;
   flex-direction: column;
