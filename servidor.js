@@ -23,16 +23,28 @@ function verificarLogin(req, res, next) {
   if (req.session.usuarioLogado) {
     next();
   } else {
-    res.redirect("/login.html");
+    res.redirect("/login");
   }
 }
 
-// Páginas protegidas
+// Página protegida
 app.get("/", verificarLogin, (req, res) => {
   res.sendFile(path.join(__dirname, "privado", "index.html"));
 });
 
-// Login
+// Rota login
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "publico", "login.html"));
+});
+
+// Rota logout
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.sendFile(path.join(__dirname, "publico", "logout.html"));
+  });
+});
+
+// Login (validação)
 app.post("/fazer_login", (req, res) => {
   const { username, password } = req.body;
   db.query(
@@ -138,7 +150,7 @@ app.post("/api/funcionarios", (req, res) => {
   );
 });
 
-// Endpoint atualizar dados de funcionário
+// Endpoint p atualizar dados de funcionário
 app.put("/api/funcionarios/:id", (req, res) => {
   const id = req.params.id;
   const { nome_funcionario, codigo_filial, salario, setor, status } = req.body;
@@ -156,7 +168,7 @@ app.put("/api/funcionarios/:id", (req, res) => {
   );
 });
 
-// Endpoint excluir funcionário
+// Endpoint p excluir funcionário
 app.delete("/api/funcionarios/:id", (req, res) => {
   const id = req.params.id;
   db.query(

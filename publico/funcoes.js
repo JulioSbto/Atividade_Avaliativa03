@@ -95,7 +95,7 @@ $(document).ready(function () {
             } else if (setor.includes("sup")) {
               $("#coluna_sup").append(card);
             } else {
-              // Se n identificar o setor, joga no adm como fallback
+              // Se n identificar o setor, joga no adm como fallback (Melhor prevenir do que remediar, disse Sun Tzu: A Arte da Guerra) (─ ‿ ─)
               $("#coluna_adm").append(card);
             }
           });
@@ -112,7 +112,7 @@ $(document).ready(function () {
         },
       });
 
-    // Se não for a Section gerenc_func, puxa a section que você clicou
+    // Se não for a Section gerenc_func, puxa a section que vc clicou
     } else {
       $("#cards_container").hide();
       $("#pagina_inicial").hide();
@@ -285,6 +285,11 @@ $(document).ready(function () {
 
   // Menu: Botão de logout
   $("#btn_sair").click(function () {
-    window.location.href = "logout.html";
+    window.location.href = "/logout";
+  });
+
+  // Botão de redirecionar p pagina de login
+  $("#btn_redirecionar").click(function () {
+    window.location.href = "/login";
   });
 });
