@@ -112,7 +112,7 @@ $(document).ready(function () {
         },
       });
 
-      // Se não for a Section gerenc_func, puxa a section que você clicou
+    // Se não for a Section gerenc_func, puxa a section que você clicou
     } else {
       $("#cards_container").hide();
       $("#pagina_inicial").hide();
